@@ -157,6 +157,7 @@ class Testpress_Lms {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		$plugin_admin->initializePages();
 	}
 
 	/**

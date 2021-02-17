@@ -51,7 +51,11 @@ class Testpress_Lms_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->load_dependencies();
+	}
 
+	private function load_dependencies() {
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-login-page.php';
 	}
 
 	/**
@@ -98,6 +102,11 @@ class Testpress_Lms_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/testpress-lms-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function initializePages() {
+		$this->login_page = new LoginPage( 'testpress-lms', $this->plugin_name );
+		add_action( 'login_form', array( $this->login_page, 'handle_form_submission' ) );
 	}
 
 }
